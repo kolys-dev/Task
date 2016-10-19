@@ -9,41 +9,26 @@ namespace Task2
 {
     class Program
     {
-        static int numberOfStrings;
-        static int errorNum;
+        static int NumOfRecords;
+        static int NumOfErrors;
 
         static void Main(string[] args)
         {
-            numberOfStrings = int.Parse(args[1]);
-            errorNum = int.Parse(args[2]);
+            NumOfRecords = int.Parse(args[1]);
+            NumOfErrors = int.Parse(args[2]);
 
-            string[] by_surnames_man = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_surnames_man.txt");           
-            string[] by_name_man = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_names_man.txt");
-            string[] by_surnames_woman = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_surnames_woman.txt");
-            string[] by_name_women = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_names_woman.txt");
-            string[] by_zip = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_zip_codes.txt");
-            string[] by_streets = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_streets.txt");
-
-            List<string> byzip = new List<string>();
-            List<string> by_names_man = new List<string>();
-            List<string> by_families_man = new List<string>();
-            List<string> by_names_women = new List<string>();
-            List<string> by_families_women = new List<string>();
-            List<string> by_streetes = new List<string>();
-
-
-            bel_formatting(by_surnames_man, by_families_man);
-            bel_formatting(by_zip, byzip);
-            bel_formatting(by_name_man, by_names_man);
-            bel_formatting(by_streets, by_streetes);
-            bel_formatting(by_surnames_woman, by_families_women);
-            bel_formatting(by_name_women, by_names_women);
+            string[] BySurnamesMan = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_surnames_man.txt");           
+            string[] ByNameMen = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_names_man.txt");
+            string[] BySurnameWomen = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_surnames_woman.txt");
+            string[] ByNameWomen = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_names_woman.txt");
+            string[] ByZipCode = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_zip_codes.txt");
+            string[] ByStreets = System.IO.File.ReadAllLines(@"C:\Users\nikol\Desktop\data\data\by_streets.txt");
 
             switch (args[0])
             {
                 
                 case "by":
-                    output_bel(by_families_man, by_names_man, byzip, by_families_women, by_names_women, by_streetes);
+                    output_bel(BySurnamesMan, ByNameMen, ByZipCode, BySurnameWomen, ByNameWomen, ByStreets);
                     break;
 
                 case "ru":
@@ -58,35 +43,27 @@ namespace Task2
 
         }
 
-        public static void bel_formatting(string[] mas, List<string> list )
+        public static void output_bel(string[] SurnameMen, string[] NameMen, string[] zip, string[] SurnameWomen, string[] NameWomen,
+             string[] Streets)
         {
-            foreach (string str in mas)
-            {
-                string st;
-                st = str.Replace('-', ' ').Replace('і', 'i').Replace('І', 'I');
-
-                list.Add(st);
-            
-            }
-        }
-
-        public static void output_bel(List<string> surname_man, List<string> name_man, List<string> zip, List<string> surname_women, List<string> name_women,
-             List<string> strets)
-        {
+            string[] phone_index = {"29", "33", "25", "44"};
  
             Random rnd = new Random();
-            for (int i = 0; i <= numberOfStrings - 1; i++)
+            for (int i = 0; i <= NumOfRecords - 1; i++)
             {
+                string homeNumber = String.Format("№{0}-{1}", rnd.Next(0,50), rnd.Next(0,140) );
                 if (rnd.Next(0, 2) == 1)
                 {
-                    Console.WriteLine(surname_women[rnd.Next(surname_women.Count)] + " " + name_women[rnd.Next(name_women.Count)] +
-                        " " + zip[rnd.Next(zip.Count)] + " " + strets[rnd.Next(strets.Count)] + " " + "+37529" + rnd.Next(1000000,9999999));
+                    Console.WriteLine(SurnameWomen[rnd.Next(SurnameWomen.Length)] + " " + NameWomen[rnd.Next(NameWomen.Length)] +
+                        " " + zip[rnd.Next(zip.Length)] + " " + Streets[rnd.Next(Streets.Length)]+" " + homeNumber + " " + "+375" + phone_index[rnd.Next(3)]
+                        + rnd.Next(1000000,9999999));
                 }
 
                 else
                 {
-                    Console.WriteLine(surname_man[rnd.Next(surname_man.Count )] + " " + name_man[rnd.Next(name_man.Count)] +
-                       " " + zip[rnd.Next(zip.Count)] + " " + strets[rnd.Next(strets.Count)] + " " + "+37529" + rnd.Next(1000000, 9999999));
+                    Console.WriteLine(SurnameMen[rnd.Next(SurnameMen.Length )] + " " + NameMen[rnd.Next(NameMen.Length)] +
+                       " " + zip[rnd.Next(zip.Length)] + " " + Streets[rnd.Next(Streets.Length)]+ " "+ homeNumber + " " + "+375"+ phone_index[rnd.Next(3)] 
+                       + rnd.Next(1000000, 9999999));
                 }
             }
         }
