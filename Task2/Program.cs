@@ -14,6 +14,7 @@ namespace Task2
 
         static void Main(string[] args)
         {
+
             numberOfStrings = int.Parse(args[1]);
             errorNum = int.Parse(args[2]);
 
