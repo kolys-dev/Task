@@ -64,7 +64,7 @@ namespace Task2
 
             for (int i = 0; i <= NumOfRecords - 1; i++)
             {
-                string homeNumber = String.Format("№{0}-{1}", rnd.Next(0,50), rnd.Next(0,140) );
+                string homeNumber = String.Format("№{0}-{1}", rnd.Next(1,50), rnd.Next(1,140) );
                 string sW = SurnameWomen[rnd.Next(SurnameWomen.Length)];
                 string nW = NameWomen[rnd.Next(NameWomen.Length)];
                 string sM = SurnameMen[rnd.Next(SurnameMen.Length)];
@@ -97,7 +97,7 @@ namespace Task2
 
             for (int i = 0; i <= NumOfRecords - 1; i++)
             {
-                string homeNumber = String.Format("№{0}, {1}", rnd.Next(0, 50), rnd.Next(0, 140));
+                string homeNumber = String.Format("№{0}, {1}", rnd.Next(1, 50), rnd.Next(1, 140));
                 string sW = SurnameWomen[rnd.Next(SurnameWomen.Length)];
                 string nW = NameWomen[rnd.Next(NameWomen.Length)]; 
                 string sM = SurnameMen[rnd.Next(SurnameMen.Length)];
