@@ -151,9 +151,9 @@ namespace Task2
                 string street = Streets[rnd.Next(Streets.Length)];
                 string phone = $"+1({ rnd.Next(111, 999)}){ rnd.Next(1000000, 9999999)}";
                 int num = rnd.Next(50);
-                string men = $"{name} {surname} {homeNumber} {street} {apt} {cities[num]}, {states[num]} zipcode:{zip} {phone}";
+                string record = $"{name} {surname} {homeNumber} {street} {apt} {cities[num]}, {states[num]} zipcode:{zip} {phone}";
 
-                    Console.WriteLine(men);
+                    Console.WriteLine(record);
             }
         }
 
