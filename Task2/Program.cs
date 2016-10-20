@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Task2
@@ -32,6 +33,20 @@ namespace Task2
             string[] ruZipCode = System.IO.File.ReadAllLines(@"data\ru_cities.txt");
             string[] ruStreets = System.IO.File.ReadAllLines(@"data\ru_streets.txt");
 
+            string[] usSurname = System.IO.File.ReadAllLines(@"data\us_surnames.txt");
+            string[] usName = System.IO.File.ReadAllLines(@"data\us_names.txt");
+            string[] usStreets = System.IO.File.ReadAllLines(@"data\us_streets.txt");
+            string[] usStates = System.IO.File.ReadAllLines(@"data\us_states_and_cities.txt");
+
+            List<string> states = new List<string>();
+            List<string> cities = new List<string>();
+
+            foreach (string s in usStates)
+            {
+                states.Add(s.Remove(s.LastIndexOf('!')));
+                cities.Add(s.Remove(0, s.IndexOf('!')+1));
+            }
+
             switch (args[0])
             {
                 
@@ -44,7 +59,8 @@ namespace Task2
                     break;
 
                 case "en":
-                    Console.WriteLine("ee");
+                    OutputUS(usSurname, usName, states, cities, usStreets);
+
                     break;
 
             }
@@ -56,8 +72,6 @@ namespace Task2
         {
             string[] phone_index = {"29", "33", "25", "44"};
 
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
             Random rnd = new Random();
 
 
@@ -106,8 +120,8 @@ namespace Task2
                 string town = city[rnd.Next(city.Length)];
                 string zip = rnd.Next(100000, 999999).ToString();
                 string street = Streets[rnd.Next(Streets.Length)];
-                string women = $"{sW} {nW} г.{town} {zip} {street} {homeNumber} +7{rnd.Next(111, 999)}{rnd.Next(1000000, 99999999)}";
-                string men = $"{sM} {nM} г.{town} {zip} {street} {homeNumber} +7{rnd.Next(111, 999)}{rnd.Next(1000000, 99999999)}";
+                string women = $"{sW} {nW} г.{town} {zip} {street} {homeNumber} +7{rnd.Next(111, 999)}{rnd.Next(1000000, 9999999)}";
+                string men = $"{sM} {nM} г.{town} {zip} {street} {homeNumber} +7{rnd.Next(111, 999)}{rnd.Next(1000000, 9999999)}";
 
                 if (rnd.Next(0, 2) == 1)
                 {
@@ -118,6 +132,28 @@ namespace Task2
                 {
                     Console.WriteLine(women);
                 }
+            }
+        }
+
+        public static void OutputUS(string[] Surname, string[] Name, List<string>states, List<string>cities, string[] Streets)
+        {
+            Random rnd = new Random();
+
+            for (int i = 0; i <= NumOfRecords - 1; i++)
+            {
+                string apt = String.Format("apt.{0}", rnd.Next(1, 120));
+                string homeNumber = String.Format("{0}", rnd.Next(1000, 20000));
+
+
+                string name = Name[rnd.Next(Name.Length)];
+                string surname = Surname[rnd.Next(Surname.Length)];
+                string zip = rnd.Next(00500, 99999).ToString();
+                string street = Streets[rnd.Next(Streets.Length)];
+                string phone = $"+1({ rnd.Next(111, 999)}){ rnd.Next(1000000, 9999999)}";
+                int num = rnd.Next(50);
+                string men = $"{name} {surname} {homeNumber} {street} {apt} {cities[num]}, {states[num]} zipcode:{zip} {phone}";
+
+                    Console.WriteLine(men);
             }
         }
 
