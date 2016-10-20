@@ -105,9 +105,6 @@ namespace Task2
         public static void OutputRU(string[] SurnameMen, string[] NameMen, string[] city, string[] SurnameWomen, string[] NameWomen,
              string[] Streets)
         {
-
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
             Random rnd = new Random();
 
             for (int i = 0; i <= NumOfRecords - 1; i++)
